@@ -1,0 +1,22 @@
+Pour la visuel sur figma : 
+
+Le visuel est présent est pour le mobile donc normal que ça soit bizarre.
+Ensuite, il est très bien actuellement (y a des petites erreurs sur les liens, mais rien de très fou : Ça se réglera avec du code)
+
+Il faudrait juste apporter des changements : Sur le Profil, plutôt que de mettre "You" en nom, il faudrait mettre un nom plus cohérent. Ensuite, il faudrait remplacer dans Pantheon ce nom avec ce format : "First Lastname (You)"
+
+Il faudrait aussi demander à mettre une suite après le bouton settings (pour gérer l'affichage notamment)
+
+Demander un visuel de création de compte et de connexion
+
+Ensuite il faudra faire le prompt pour avoir une version web : 
+
+Primaire : #7C3AED (violet électrique)
+Accent : #FBBF24 (jaune doré pour récompenses)
+Fond : #FFFFFF (blanc pur)
+Texte : #0A1F44 (le tien)
+Surface : #F5F3FF (lavande très clair pour les cards)
+
+https://dev.to/alansomathew/django-project-structure-best-practices-a-production-ready-guide-3io3
+
+Lien pour justement donner les meilleurs tips de Django, comment ça marche, etc ...

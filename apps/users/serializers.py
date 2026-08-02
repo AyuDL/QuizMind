@@ -1,0 +1,28 @@
+
+from rest_framework import serializers
+from .models import Users as User
+
+class UserSerializer(serializers.ModelSerializer):
+    firstname = serializers.CharField(source='first_name')
+
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'email', 'first_name', 'last_name']
+
+class RegisterSerializer(serializers.ModelSerializer):
+    accepted_terms = serializers.BooleanField(required=True)  # Add a field for accepted_terms
+    password = serializers.CharField(write_only=True, required=True, style={'input_type': 'password'})
+
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'email', 'first_name', 'last_name', 'password']
+
+    def create(self, validated_data):
+        user = User.objects.create_user(
+            username=validated_data['username'],
+            email=validated_data['email'],
+            first_name=validated_data['first_name'],
+            last_name=validated_data['last_name'],
+            password=validated_data['password']
+        )
+        return user
