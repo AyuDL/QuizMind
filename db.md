@@ -1,16 +1,22 @@
 ## SQL
+Token
+	ID uuid
+	value string
+	purpose string
+	expires_at datetime
+	used_at datetime
+	user_id uuid
 
-Users
+User
 	ID uuid
 	lastname string
 	firstname string
-	pseudo string
+	username string
 	email string
 	password password
 	birth_date datetime
 	created_at datetime
 	league_point int
-	accept_terms bool
 	registered bool
 	is_admin bool
 
