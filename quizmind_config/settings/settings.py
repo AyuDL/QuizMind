@@ -118,9 +118,11 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': 'rest_framework_simplejwt.authentication.JWTAuthentication',
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 20                 #Concern about the page size, we can change it according to our needs. The default is 20.
+    'PAGE_SIZE': 20,
 }
 
 SIMPLE_JWT = {
