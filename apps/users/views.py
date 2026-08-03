@@ -1,6 +1,8 @@
 from rest_framework import generics, permissions, status
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from django.contrib.auth.password_validation import validate_password
+from django.core.exceptions import ValidationError
 from .services import consume_token
 from .models import TokenPurpose
 from .serializers import RegisterSerializer
@@ -9,7 +11,7 @@ class RegisterView(generics.CreateAPIView):
     serializer_class = RegisterSerializer               #Keep on var to use it by DRF
     permission_classes = [permissions.AllowAny]
 
-class ConfirmAccountVIew(APIView):
+class ConfirmAccountView(APIView):
     permission_classes = [permissions.AllowAny]
 
     def post(self, request):
@@ -22,3 +24,24 @@ class ConfirmAccountVIew(APIView):
         user.is_active = True
         user.save()
         return Response({"detail": "Compte confirmé."}, status=status.HTTP_200_OK)
+
+class ResetPasswordView(APIView):
+    permission_classes = [permissions.AllowAny]
+
+    def post(self, request):
+        token_value = request.data.get("token")
+        password_value = request.data.get("password")
+
+        user = consume_token(token_value, TokenPurpose.PASSWORD_RESET)
+
+        if user is None:
+            return Response({"detail": "Token invalide ou expiré."}, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            validate_password(password_value, user)
+        except ValidationError as e:
+            return Response({"detail": e.messages}, status=status.HTTP_400_BAD_REQUEST)
+
+        user.set_password(password_value)
+        user.save()
+        return Response({"detail": "Mot de passe réinitialisé."}, status=status.HTTP_200_OK)
