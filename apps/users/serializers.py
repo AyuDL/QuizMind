@@ -27,3 +27,13 @@ class RegisterSerializer(serializers.ModelSerializer):
             password=validated_data['password'],
         )
         return user
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'email', 'first_name', 'last_name', 'league_point', 'date_joined', 'birth_date']
+        read_only_fields = ['id', 'first_name', 'last_name', 'league_point', 'date_joined', 'birth_date']
+
+class ChangePasswordSerializer(serializers.Serializer):
+    old_password = serializers.CharField(write_only=True, required=True, style={'input_type' : 'password'})
+    password = serializers.CharField(write_only=True, required=True, style={'input_type' : 'password'})
