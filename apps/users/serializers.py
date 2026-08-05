@@ -1,6 +1,7 @@
 
 from rest_framework import serializers
 from .models import Users as User
+from apps.quizzs.models import Category
 
 class UserSerializer(serializers.ModelSerializer):
     firstname = serializers.CharField(source='first_name')
@@ -37,3 +38,18 @@ class UserSerializer(serializers.ModelSerializer):
 class ChangePasswordSerializer(serializers.Serializer):
     old_password = serializers.CharField(write_only=True, required=True, style={'input_type' : 'password'})
     password = serializers.CharField(write_only=True, required=True, style={'input_type' : 'password'})
+
+class PreferredCategoriesSerializer(serializers.ModelSerializer):
+    preferred_categories = serializers.PrimaryKeyRelatedField(
+        many=True,                          #Accept list of id
+        queryset=Category.objects.all(),    #From Category
+    )
+
+    class Meta:
+        model = User
+        fields = ["preferred_categories"]
+
+    def validate_preferred_categories(self, value):
+        if len(value) > 0 and len(value) < 3:
+            raise serializers.ValidationError("Sélectionne au moins 3 thèmes.")
+        return value

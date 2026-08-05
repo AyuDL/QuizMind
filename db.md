@@ -7,6 +7,10 @@ Token
 	used_at datetime
 	user_id uuid
 
+Category
+	ID uuid
+	label string
+
 User
 	ID uuid
 	lastname string
@@ -37,10 +41,6 @@ Quiz
 	difficulty string
 	uploaded_file_id uuid
 	category_id uuid
-
-Quiz_Category
-	ID uuid
-	type string
 
 Comment
 	ID uuid
