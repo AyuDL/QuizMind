@@ -13,32 +13,31 @@ Category
 
 User
 	ID uuid
-	lastname string
-	firstname string
+	last_name string
+	first_name string
 	username string
 	email string
 	password password
 	birth_date datetime
 	created_at datetime
 	league_point int
-	registered bool
-	is_admin bool
+	is_confirmed bool
 
 Quiz_User
 	ID uuid
 	user_id uuid
 	quiz_id uuid
 	quiz_point int
+	did_at datetime
 
 Quiz
 	ID uuid
-	number_question int
 	title string
 	description string
 	is_public bool
 	created_at datetime
-	user_id uuid
 	difficulty string
+	user_id uuid
 	uploaded_file_id uuid
 	category_id uuid
 
@@ -52,7 +51,7 @@ Comment
 Question
 	ID uuid
 	title string
-	hint string
+	explanation string
 
 Question_Choice
 	ID uuid

@@ -1,6 +1,6 @@
 
 from rest_framework import serializers
-from .models import Users as User
+from .models import User
 from apps.quizzs.models import Category
 
 class UserSerializer(serializers.ModelSerializer):
