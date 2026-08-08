@@ -1,4 +1,7 @@
-from apps.common.models import UuidModel
+from apps.common.models import UuidModel, TimestampModel
+from django.db import models
 
-class UploadedFile(UuidModel):
-    pass
+class UploadedFile(UuidModel, TimestampModel):
+    url = models.CharField()
+    file_full_name = models.CharField()
+    file_custom_name = models.CharField()

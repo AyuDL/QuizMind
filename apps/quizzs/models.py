@@ -22,11 +22,11 @@ class QuizUser(UuidModel, TimestampModel):
         unique_together = ("user", "quiz")
 
 class Question(UuidModel):
-    title = models.CharField(max_length=1000)
+    title = models.CharField()
     explanation = models.TextField(blank=True)
     quiz = models.ForeignKey("quizzs.Quiz", on_delete=models.CASCADE, related_name="questions")
 
 class QuestionChoice(UuidModel):
-    content = models.CharField(max_length=500)
+    content = models.CharField()
     is_true = models.BooleanField(default=False)
     question = models.ForeignKey("quizzs.Question", on_delete=models.CASCADE, related_name="choices")   #related_name="choices" is for use it when call "question.choices.all()" by example

@@ -5,7 +5,7 @@ from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 from .services import consume_token
 from .models import TokenPurpose
-from .serializers import RegisterSerializer, UserSerializer, ChangePasswordSerializer
+from .serializers import RegisterSerializer, UserSerializer, ChangePasswordSerializer, PreferredCategoriesSerializer
 
 class RegisterView(generics.CreateAPIView):
     serializer_class = RegisterSerializer               #Keep on var to use it by DRF
@@ -48,6 +48,13 @@ class ResetPasswordView(APIView):
 
 class CurrentUserView(generics.RetrieveUpdateAPIView):
     serializer_class = UserSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_object(self):
+        return self.request.user
+
+class PreferredCategoriesView(generics.RetrieveUpdateAPIView):
+    serializer_class = PreferredCategoriesSerializer
     permission_classes = [permissions.IsAuthenticated]
 
     def get_object(self):

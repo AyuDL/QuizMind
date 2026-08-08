@@ -64,7 +64,6 @@ Uploaded_file
 	url string
 	file_full_name string
 	file_custom_name string
-	status string (gérer avec choices)
 	created_at datetime
 
 Badge
